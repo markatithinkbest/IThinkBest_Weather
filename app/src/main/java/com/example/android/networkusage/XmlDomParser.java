@@ -160,7 +160,7 @@ public class XmlDomParser {
                                                                 Log.d(LOG_TAG, "---------------" + parameter.getTagName() + " " + parameter.getTextContent());
 
                                                                 //
-                                                                if (weatherElemenetCode==3 &&  timeCode==14 && parameter.getTagName().equals("parameterUnit")){
+                                                                if (weatherElemenetCode==3 &&  timeCode==13 && parameter.getTagName().equals("parameterUnit")){
                                                                   weatherEntryList.add(weatherEntry);
                                                                     Log.d(LOG_TAG, "###### adding---------------");
 
