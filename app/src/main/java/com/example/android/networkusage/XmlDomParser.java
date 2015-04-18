@@ -27,11 +27,14 @@ public class XmlDomParser {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         try {
             DocumentBuilder builder = factory.newDocumentBuilder();
+
+            // Document can easily handle source from local file or net
 //            Document doc = builder.parse("C:\\xmlfiles\\F-C0032-005.xml");
             Document doc = builder.parse(URL2);
 
             Log.d(LOG_TAG, "...DOING PARSE...");
 
+            // paring single datasetInfo
             NodeList dataInfoList = doc.getElementsByTagName("datasetInfo");
             for (int x = 0; x < dataInfoList.getLength(); x++) {
                 Node dataInfoNode = dataInfoList.item(x);// only one
@@ -52,22 +55,38 @@ public class XmlDomParser {
             }
             System.out.println("----------------------------------------");
 
+            // paring multiple location
+            // ...locationList contains all <location>
             NodeList locationList = doc.getElementsByTagName("location");
             for (int i = 0; i < locationList.getLength(); i++) {
                 Node p = locationList.item(i);
                 if (p.getNodeType() == Node.ELEMENT_NODE) {
                     Element location = (Element) p;
-                    System.out.println("..." + location.getTagName());
+//                    System.out.println("..." + location.getTagName());
+                    Log.d(LOG_TAG, "XXX..." + location.getTagName());
+//                    Log.d(LOG_TAG, "XXX..." + location.getTextContent());
+
+
                     NodeList dataList = location.getChildNodes();
+//                    Log.d(LOG_TAG, "XXX...dataList.getLength()=" + dataList.getLength());
+
                     for (int j = 0; j < dataList.getLength(); j++) {
                         Node n = dataList.item(j);
                         if (n.getNodeType() == Node.ELEMENT_NODE) {
                             Element data = (Element) n;
+                            Log.d(LOG_TAG, "yyy..." + data.getTagName());
+  //                          Log.d(LOG_TAG, "yyy..." + data.getTextContent());
+
+
                             if (data.getTagName() == "locationName") {
-                                System.out.println("......" + data.getTagName() +" "+ data.getTextContent());
+//                                System.out.println("......" + data.getTagName() +" "+ data.getTextContent());
+                                Log.d(LOG_TAG,  "???......" + data.getTagName() +" "+ data.getTextContent());
+
                             } else if (data.getTagName() == "weatherElement") {
 //                                System.out.println("... going to parse weatherElement");
-                                System.out.println("......" + data.getTagName());
+//                                System.out.println("......" + data.getTagName());
+                                Log.d(LOG_TAG,  "......" + data.getTagName());
+
                                 NodeList weatherElementList = data.getChildNodes();
 //                                System.out.println("... going to parse weatherElement, weatherElementList.getLength()=" + weatherElementList.getLength());
 //                                System.out.println("... going to parse weatherElement, item 0 NodeName=" + weatherElementList.item(0).getNodeName());
@@ -78,10 +97,12 @@ public class XmlDomParser {
                                     if (nodeK.getNodeType() == Node.ELEMENT_NODE) {
                                         Element weather = (Element) nodeK;
                                         if (weather.getTagName() == "elementName") {
-                                            System.out.println("........." + weather.getTagName() + " " + weather.getTextContent());
+//                                            System.out.println("........." + weather.getTagName() + " " + weather.getTextContent());
+                                            Log.d(LOG_TAG,  "........." + weather.getTagName() + " " + weather.getTextContent());
 
                                         } else if (weather.getTagName() == "time") {
-                                            System.out.println("........." + weather.getTagName());
+//                                            System.out.println("........." + weather.getTagName());
+                                            Log.d(LOG_TAG,  "........." + weather.getTagName());
 
                                             NodeList timeList = weather.getChildNodes();
 
@@ -93,12 +114,15 @@ public class XmlDomParser {
                                                     Element time = (Element) nodeM;
                                                     if (time.getTagName() == "startTime") {
                                                         System.out.println("........." + time.getTagName() + " " + time.getTextContent());
+                                                        Log.d(LOG_TAG,  "........." + time.getTagName() + " " + time.getTextContent());
 
                                                     } else if (time.getTagName() == "endTime") {
-                                                        System.out.println("............" + time.getTagName() + " " + time.getTextContent());
+//                                                        System.out.println("............" + time.getTagName() + " " + time.getTextContent());
+                                                        Log.d(LOG_TAG,  "........." + time.getTagName() + " " + time.getTextContent());
 
                                                     } else if (time.getTagName() == "parameter") {
-                                                        System.out.println("............parameter");
+//                                                        System.out.println("............parameter");
+                                                        Log.d(LOG_TAG,  "............parameter");
 
                                                         NodeList parameterList = time.getChildNodes();
                                                         for (int m2 = 0; m2 < parameterList.getLength(); m2++) {
@@ -107,6 +131,9 @@ public class XmlDomParser {
                                                             if (nodeN.getNodeType() == Node.ELEMENT_NODE) {
                                                                 Element parameter = (Element) nodeN;
                                                                 System.out.println("..............." + parameter.getTagName() + " " + parameter.getTextContent());
+                                                                Log.d(LOG_TAG, "..............." + parameter.getTagName() + " " + parameter.getTextContent());
+
+
                                                             } else {
                                                                 //    System.out.println("??? WHAT NOT ELEMENT_NODE");
                                                             }
