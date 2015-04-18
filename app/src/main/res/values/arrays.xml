@@ -18,8 +18,8 @@
 
 <resources>
     <string-array name="listArray">
-        <item>Only when on Wi-Fi</item>
-        <item>On any network</item>
+        <item>只使用 Wi-Fi</item>
+        <item>任何網路</item>
     </string-array>
     <string-array name="listValues">
         <item>Wi-Fi</item>

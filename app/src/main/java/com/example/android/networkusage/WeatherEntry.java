@@ -74,21 +74,55 @@ public class WeatherEntry {
 
     public WeatherEntry(){
 
-        startTime=new String[14];
-        endTime=new String[14];
-        parameterWxName=new String[14];
-        parameterWxValue=new int[14];
-        parameterMaxTName=new int[14];
-        parameterMinTName=new int[14];
+        startTime=new String[15];
+        endTime=new String[15];
+        parameterWxName=new String[15];
+        parameterWxValue=new int[15];
+        parameterMaxTName=new int[15];
+        parameterMinTName=new int[15];
 
 
     }
+    String getDateStr(String str){
+        return str.substring(5,7)+"/"+str.substring(8,10)+" "+str.substring(11,16);
+    }
+    public String getCurrent(){
+        StringBuilder sb=new StringBuilder();
+        for (int i=0;i<1;i++){
+            sb.append(getDateStr(startTime[i])).append(" ~ ").append(getDateStr(endTime[i])).
+                    append("<br>");
+            sb.append(parameterWxName[i]).append(" ");
+            sb.append("最低"+parameterMinTName[i]).append(" ");
+            sb.append("最高"+parameterMaxTName[i]).append("度<br><br>");
 
-//    @Override
-//    public String toString() {
-//        return "WeatherEntry{" +
-//                "locationName='" + locationName + '\'' +
-//                ", startTime=" + Arrays.toString(startTime) +
-//                '}';
-//    }
+
+        }
+        return sb.toString();
+    }
+
+    public String getDetail(){
+        StringBuilder sb=new StringBuilder();
+        for (int i=0;i<14;i++){
+            sb.append(getDateStr(startTime[i])).append(" ~ ").append(getDateStr(endTime[i])).
+                    append("<br>");
+            sb.append(parameterWxName[i]).append(" ");
+            sb.append("最低"+parameterMinTName[i]).append(" ");
+            sb.append("最高"+parameterMaxTName[i]).append("度<br><br>");
+
+
+        }
+        return sb.toString();
+    }
+    @Override
+    public String toString() {
+        return "WeatherEntry{" +
+                "locationName='" + locationName + '\'' +
+                ", startTime=" + Arrays.toString(startTime) +
+                ", endTime=" + Arrays.toString(endTime) +
+                ", parameterWxName=" + Arrays.toString(parameterWxName) +
+                ", parameterWxValue=" + Arrays.toString(parameterWxValue) +
+                ", parameterMaxTName=" + Arrays.toString(parameterMaxTName) +
+                ", parameterMinTName=" + Arrays.toString(parameterMinTName) +
+                '}';
+    }
 }

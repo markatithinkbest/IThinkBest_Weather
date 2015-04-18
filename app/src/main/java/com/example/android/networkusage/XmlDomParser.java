@@ -19,7 +19,8 @@ public class XmlDomParser {
     public static final String LOG_TAG = "MARK987";
     private static final String URL2 =
             "http://opendata.cwb.gov.tw/opendataapi?dataid=F-C0032-005&authorizationkey=CWB-B2CA193D-2DE6-4121-AF6A-BFA9C12713BF";
-    static int weatherElemenetCode=0;
+    static int weatherElemenetCode = 0;
+
     /**
      * @param args the command line arguments
      */
@@ -27,8 +28,8 @@ public class XmlDomParser {
         // TODO code application logic here
     }
 
-    public static  List<WeatherEntry> parse() {
-        List<WeatherEntry> weatherEntryList=new ArrayList<WeatherEntry>();
+    public static List<WeatherEntry> parse() {
+        List<WeatherEntry> weatherEntryList = new ArrayList<WeatherEntry>();
 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         try {
@@ -61,7 +62,7 @@ public class XmlDomParser {
 //            Log.d(LOG_TAG, "----------------------------------------");
             NodeList locationList = doc.getElementsByTagName("location");
 
-            WeatherEntry weatherEntry=null;
+            WeatherEntry weatherEntry = null;
 
 
             for (int i = 0; i < locationList.getLength(); i++) {
@@ -79,9 +80,9 @@ public class XmlDomParser {
 
 
                             if (data.getTagName().equals("locationName")) {
-//                                Log.d(LOG_TAG, "------" + data.getTagName().toString() + " " + data.getTextContent().toString());
+                                Log.d(LOG_TAG, "------" + data.getTagName().toString() + " " + data.getTextContent().toString());
 
-                                weatherEntry=new WeatherEntry();
+                                weatherEntry = new WeatherEntry();
                                 weatherEntry.setLocationName(data.getTextContent().toString());
 
                             } else if (data.getTagName().equals("weatherElement")) {
@@ -89,7 +90,7 @@ public class XmlDomParser {
                                 NodeList weatherElementList = data.getChildNodes();
 
                                 // so it will be used starting from 0
-                                int timeCode=-1;
+                                int timeCode = -1;
 
                                 for (int k = 0; k < weatherElementList.getLength(); k++) {
 // Log.d(LOG_TAG,"......k=" + k);
@@ -104,22 +105,27 @@ public class XmlDomParser {
                                         if (weather.getTagName().equals("elementName")) {
 //                                            Log.d(LOG_TAG, "---------" + weather.getTagName() + " " + weather.getTextContent());
                                             if (weather.getTextContent().equals("Wx")) {
-                                                weatherElemenetCode=1;
+                                                weatherElemenetCode = 1;
                                             }
                                             if (weather.getTextContent().equals("MaxT")) {
-                                                weatherElemenetCode=2;
+                                                weatherElemenetCode = 2;
 
                                             }
                                             if (weather.getTextContent().equals("MinT")) {
-                                                weatherElemenetCode=3;
+                                                weatherElemenetCode = 3;
 
                                             }
-
-
 
 
                                         } else if (weather.getTagName().equals("time")) {
                                             timeCode++;
+
+                                            //
+                                            // <time> might be 14 or 15
+
+
+
+                                            //
 
 //                                            Log.d(LOG_TAG, "---------" + weather.getTagName());
                                             NodeList timeList = weather.getChildNodes();
@@ -130,15 +136,15 @@ public class XmlDomParser {
                                                     if (time.getTagName().equals("startTime")) {
 //                                                        Log.d(LOG_TAG, "------------" + time.getTagName() + " " + time.getTextContent());
 //                                                        Log.d(LOG_TAG, "------------timeCode=" + timeCode);
-                                                        if (weatherElemenetCode==1){
-                                                            weatherEntry.setStartTime(time.getTextContent(),timeCode);
+                                                        if (weatherElemenetCode == 1) {
+                                                            weatherEntry.setStartTime(time.getTextContent(), timeCode);
                                                         }
 
 
                                                     } else if (time.getTagName().equals("endTime")) {
 //                                                        Log.d(LOG_TAG, "------------" + time.getTagName() + " " + time.getTextContent());
-                                                        if (weatherElemenetCode==1){
-                                                            weatherEntry.setEndTime(time.getTextContent(),timeCode);
+                                                        if (weatherElemenetCode == 1) {
+                                                            weatherEntry.setEndTime(time.getTextContent(), timeCode);
                                                         }
 
                                                     } else if (time.getTagName().equals("parameter")) {
@@ -153,26 +159,26 @@ public class XmlDomParser {
 
                                                                     switch (weatherElemenetCode) {
                                                                         case 1:
-                                                                            weatherEntry.setParameterWxName(parameter.getTextContent(),timeCode);
+                                                                            weatherEntry.setParameterWxName(parameter.getTextContent(), timeCode);
                                                                             break;
                                                                         case 2:
-                                                                            weatherEntry.setParameterMaxTName( Integer.parseInt(parameter.getTextContent()),timeCode);
+                                                                            weatherEntry.setParameterMaxTName(Integer.parseInt(parameter.getTextContent()), timeCode);
                                                                             break;
                                                                         case 3:
-                                                                            weatherEntry.setParameterMinTName( Integer.parseInt(parameter.getTextContent()),timeCode);
+                                                                            weatherEntry.setParameterMinTName(Integer.parseInt(parameter.getTextContent()), timeCode);
                                                                             break;
 
                                                                     }
 
                                                                 }
 
-                                                                if (weatherElemenetCode==1 && parameter.getTagName().equals("parameterValue")) {
+                                                                if (weatherElemenetCode == 1 && parameter.getTagName().equals("parameterValue")) {
 
-                                                                            weatherEntry.setParameterWxValue(Integer.parseInt(parameter.getTextContent()), timeCode);
-                                                                    }
-                                                                            //
-                                                                if (weatherElemenetCode==3 &&  timeCode==13 && parameter.getTagName().equals("parameterUnit")){
-                                                                  weatherEntryList.add(weatherEntry);
+                                                                    weatherEntry.setParameterWxValue(Integer.parseInt(parameter.getTextContent()), timeCode);
+                                                                }
+                                                                //
+                                                                if (weatherElemenetCode == 3 && timeCode == 13 && parameter.getTagName().equals("parameterUnit")) {
+                                                                    weatherEntryList.add(weatherEntry);
 //                                                                    Log.d(LOG_TAG, "###### adding---------------");
 
                                                                 }
@@ -202,13 +208,14 @@ public class XmlDomParser {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            Log.d(LOG_TAG,"$$$$$$$$$$$$$$$$$$$$$$$$$$$$ EXCEPTION HERE?"+e.toString());
         }
 
 //        Log.d(LOG_TAG,weatherEntryList.size()+" entries!!!");
 //        for (int i=0;i<weatherEntryList.size();i++){
 //            Log.d(LOG_TAG,weatherEntryList.get(i).toString());
 //        }
-       return weatherEntryList;
+        return weatherEntryList;
     }
 
 }

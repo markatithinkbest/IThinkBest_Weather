@@ -263,7 +263,8 @@ public class NetworkActivity extends Activity {
         String url = null;
         String summary = null;
         Calendar rightNow = Calendar.getInstance();
-        DateFormat formatter = new SimpleDateFormat("MMM dd h:mmaa");
+//        DateFormat formatter = new SimpleDateFormat("MMM dd h:mmaa");
+        DateFormat formatter = new SimpleDateFormat("MM/dd hh:mm:ss");
 
         // Checks whether the user set the preference to include summary text
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -272,7 +273,9 @@ public class NetworkActivity extends Activity {
         StringBuilder htmlString = new StringBuilder();
         htmlString.append("<h3>" + getResources().getString(R.string.page_title) + "</h3>");
         htmlString.append("<em>" + getResources().getString(R.string.updated) + " " +
-                formatter.format(rightNow.getTime()) + "</em>");
+                formatter.format(rightNow.getTime()) + "</em><br>");
+        htmlString.append("<br>即時使用");
+        htmlString.append("<br><a href='http://opendata.cwb.gov.tw/datalist'>中央氣象局開放資料</a><br>");
 
         try {
             stream = downloadUrl(urlString);
@@ -311,6 +314,12 @@ public class NetworkActivity extends Activity {
             htmlString.append("<h4>");
             htmlString.append(entry.getLocationName());
             htmlString.append("</h4>");
+            if (pref) {
+                htmlString.append(entry.getCurrent());
+            }else{
+                htmlString.append(entry.getDetail());
+            }
+
 
 //            if (pref) {
 //                htmlString.append(entry.summary);
