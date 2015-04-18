@@ -29,6 +29,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Toast;
 
@@ -49,18 +50,18 @@ import java.util.List;
 
 /**
  * Main Activity for the sample application.
- *
+ * <p/>
  * This activity does the following:
- *
+ * <p/>
  * o Presents a WebView screen to users. This WebView has a list of HTML links to the latest
- *   questions tagged 'android' on stackoverflow.com.
- *
+ * questions tagged 'android' on stackoverflow.com.
+ * <p/>
  * o Parses the StackOverflow XML feed using XMLPullParser.
- *
+ * <p/>
  * o Uses AsyncTask to download and process the XML feed.
- *
+ * <p/>
  * o Monitors preferences and the device's network connection to determine whether
- *   to refresh the WebView content.
+ * to refresh the WebView content.
  */
 public class NetworkActivity extends Activity {
     public static final String LOG_TAG = "MARK987";
@@ -72,7 +73,7 @@ public class NetworkActivity extends Activity {
             "http://stackoverflow.com/feeds/tag?tagnames=android&sort=newest";
 
     private static final String URL2 =
-    "http://opendata.cwb.gov.tw/opendataapi?dataid=F-C0032-005&authorizationkey=CWB-B2CA193D-2DE6-4121-AF6A-BFA9C12713BF";
+            "http://opendata.cwb.gov.tw/opendataapi?dataid=F-C0032-005&authorizationkey=CWB-B2CA193D-2DE6-4121-AF6A-BFA9C12713BF";
 
     // Whether there is a Wi-Fi connection.
     private static boolean wifiConnected = false;
@@ -186,14 +187,14 @@ public class NetworkActivity extends Activity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-        case R.id.settings:
+            case R.id.settings:
                 Intent settingsActivity = new Intent(getBaseContext(), SettingsActivity.class);
                 startActivity(settingsActivity);
                 return true;
-        case R.id.refresh:
+            case R.id.refresh:
                 loadPage();
                 return true;
-        default:
+            default:
                 return super.onOptionsItemSelected(item);
         }
     }
@@ -240,7 +241,12 @@ public class NetworkActivity extends Activity {
             setContentView(R.layout.main);
             // Displays the HTML string in the UI via a WebView
             WebView myWebView = (WebView) findViewById(R.id.webview);
-            myWebView.loadData(result, "text/html", null);
+
+            //http://stackoverflow.com/questions/4933069/android-webview-with-garbled-utf-8-characters
+
+
+            //Finally this one worked, show Chinese properly!
+            myWebView.loadData(result, "text/html; charset=utf-8", "UTF-8");
         }
     }
 
@@ -250,7 +256,6 @@ public class NetworkActivity extends Activity {
 
 //        StackOverflowXmlParser stackOverflowXmlParser = new StackOverflowXmlParser();
         TaiwanWeatherXmlParser taiwanWeatherXmlParser = new TaiwanWeatherXmlParser();
-
 
 
         List<WeatherEntry> entries = null;
@@ -274,10 +279,9 @@ public class NetworkActivity extends Activity {
 
 
             // to fix parser here
-            entries = taiwanWeatherXmlParser.parse(stream);
-            XmlDomParser.parse();
-            Log.d(LOG_TAG, "...after converting to entries");
-
+//            entries = taiwanWeatherXmlParser.parse(stream);
+            entries = XmlDomParser.parse();
+            Log.d(LOG_TAG, "...after converting to entries, entry cnt is " + entries.size());
 
 
             // Makes sure that the InputStream is closed after the app is
@@ -303,9 +307,17 @@ public class NetworkActivity extends Activity {
 //                htmlString.append(entry.summary);
 //            }
 //        }
+        for (WeatherEntry entry : entries) {
+            htmlString.append("<h4>");
+            htmlString.append(entry.getLocationName());
+            htmlString.append("</h4>");
+
+//            if (pref) {
+//                htmlString.append(entry.summary);
+//            }
+        }
         return htmlString.toString();
     }
-
 
 
     // Uploads XML from stackoverflow.com, parses it, and combines it with
@@ -332,8 +344,8 @@ public class NetworkActivity extends Activity {
         try {
             stream = downloadUrl(urlString);
             entries = stackOverflowXmlParser.parse(stream);
-        // Makes sure that the InputStream is closed after the app is
-        // finished using it.
+            // Makes sure that the InputStream is closed after the app is
+            // finished using it.
         } finally {
             if (stream != null) {
                 stream.close();
@@ -374,12 +386,10 @@ public class NetworkActivity extends Activity {
     }
 
     /**
-     *
      * This BroadcastReceiver intercepts the android.net.ConnectivityManager.CONNECTIVITY_ACTION,
      * which indicates a connection change. It checks whether the type is TYPE_WIFI.
      * If it is, it checks whether Wi-Fi is connected and sets the wifiConnected flag in the
      * main activity accordingly.
-     *
      */
     public class NetworkReceiver extends BroadcastReceiver {
 
