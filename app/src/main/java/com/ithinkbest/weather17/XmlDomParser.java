@@ -1,4 +1,4 @@
-package com.example.android.networkusage;
+package com.ithinkbest.weather17;
 
 import android.util.Log;
 
@@ -80,7 +80,7 @@ public class XmlDomParser {
 
 
                             if (data.getTagName().equals("locationName")) {
-                                Log.d(LOG_TAG, "------" + data.getTagName().toString() + " " + data.getTextContent().toString());
+//                                Log.d(LOG_TAG, "------" + data.getTagName().toString() + " " + data.getTextContent().toString());
 
                                 weatherEntry = new WeatherEntry();
                                 weatherEntry.setLocationName(data.getTextContent().toString());

@@ -12,7 +12,7 @@
  * the License.
  */
 
-package com.example.android.networkusage;
+package com.ithinkbest.weather17;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -29,12 +29,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Toast;
 
-import com.example.android.networkusage.R;
-import com.example.android.networkusage.StackOverflowXmlParser.Entry;
+
 
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -284,7 +282,7 @@ public class NetworkActivity extends Activity {
             // to fix parser here
 //            entries = taiwanWeatherXmlParser.parse(stream);
             entries = XmlDomParser.parse();
-            Log.d(LOG_TAG, "...after converting to entries, entry cnt is " + entries.size());
+//            Log.d(LOG_TAG, "...after converting to entries, entry cnt is " + entries.size());
 
 
             // Makes sure that the InputStream is closed after the app is
@@ -334,7 +332,7 @@ public class NetworkActivity extends Activity {
     private String loadXmlFromNetwork(String urlString) throws XmlPullParserException, IOException {
         InputStream stream = null;
         StackOverflowXmlParser stackOverflowXmlParser = new StackOverflowXmlParser();
-        List<Entry> entries = null;
+        List<StackOverflowXmlParser.Entry> entries = null;
         String title = null;
         String url = null;
         String summary = null;
@@ -366,7 +364,7 @@ public class NetworkActivity extends Activity {
         // This section processes the entries list to combine each entry with HTML markup.
         // Each entry is displayed in the UI as a link that optionally includes
         // a text summary.
-        for (Entry entry : entries) {
+        for (StackOverflowXmlParser.Entry entry : entries) {
             htmlString.append("<p><a href='");
             htmlString.append(entry.link);
             htmlString.append("'>" + entry.title + "</a></p>");

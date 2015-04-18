@@ -12,7 +12,7 @@
  * the License.
  */
 
-package com.example.android.networkusage;
+package com.ithinkbest.weather17;
 
 import android.util.Xml;
 
@@ -29,12 +29,17 @@ import java.util.List;
  * Given an InputStream representation of a feed, it returns a List of entries,
  * where each list element represents a single entry (post) in the XML feed.
  */
-public class StackOverflowXmlParser {
+public class TaiwanWeatherXmlParser {
     private static final String ns = null;
 
-    // We don't use namespaces
 
-    public List<Entry> parse(InputStream in) throws XmlPullParserException, IOException {
+
+
+
+
+
+
+    public List<WeatherEntry> parse(InputStream in) throws XmlPullParserException, IOException {
         try {
             XmlPullParser parser = Xml.newPullParser();
             parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
@@ -46,63 +51,57 @@ public class StackOverflowXmlParser {
         }
     }
 
-    private List<Entry> readFeed(XmlPullParser parser) throws XmlPullParserException, IOException {
-        List<Entry> entries = new ArrayList<Entry>();
+    private List<WeatherEntry> readFeed(XmlPullParser parser) throws XmlPullParserException, IOException {
+        List<WeatherEntry> entries = new ArrayList<WeatherEntry>();
 
-        parser.require(XmlPullParser.START_TAG, ns, "feed");
-        while (parser.next() != XmlPullParser.END_TAG) {
-            if (parser.getEventType() != XmlPullParser.START_TAG) {
-                continue;
-            }
-            String name = parser.getName();
-            // Starts by looking for the entry tag
-            if (name.equals("entry")) {
-                entries.add(readEntry(parser));
-            } else {
-                skip(parser);
-            }
-        }
+        // HOW TO REWRITE IT LIKE THIS STYLE
+//        parser.require(XmlPullParser.START_TAG, ns, "feed");
+//        while (parser.next() != XmlPullParser.END_TAG) {
+//            if (parser.getEventType() != XmlPullParser.START_TAG) {
+//                continue;
+//            }
+//            String name = parser.getName();
+//            // Starts by looking for the entry tag
+//            if (name.equals("entry")) {
+//                entries.add(readEntry(parser));
+//            } else {
+//                skip(parser);
+//            }
+//        }
+//
+        WeatherEntry weatherEntry=new WeatherEntry();
+        entries.add(weatherEntry);
+
         return entries;
     }
 
-    // This class represents a single entry (post) in the XML feed.
-    // It includes the data members "title," "link," and "summary."
-    public static class Entry {
-        public final String title;
-        public final String link;
-        public final String summary;
 
-        private Entry(String title, String summary, String link) {
-            this.title = title;
-            this.summary = summary;
-            this.link = link;
-        }
-    }
 
     // Parses the contents of an entry. If it encounters a title, summary, or link tag, hands them
     // off
     // to their respective &quot;read&quot; methods for processing. Otherwise, skips the tag.
-    private Entry readEntry(XmlPullParser parser) throws XmlPullParserException, IOException {
-        parser.require(XmlPullParser.START_TAG, ns, "entry");
-        String title = null;
-        String summary = null;
-        String link = null;
-        while (parser.next() != XmlPullParser.END_TAG) {
-            if (parser.getEventType() != XmlPullParser.START_TAG) {
-                continue;
-            }
-            String name = parser.getName();
-            if (name.equals("title")) {
-                title = readTitle(parser);
-            } else if (name.equals("summary")) {
-                summary = readSummary(parser);
-            } else if (name.equals("link")) {
-                link = readLink(parser);
-            } else {
-                skip(parser);
-            }
-        }
-        return new Entry(title, summary, link);
+    private WeatherEntry readEntry(XmlPullParser parser) throws XmlPullParserException, IOException {
+//        parser.require(XmlPullParser.START_TAG, ns, "entry");
+//        String title = null;
+//        String summary = null;
+//        String link = null;
+//        while (parser.next() != XmlPullParser.END_TAG) {
+//            if (parser.getEventType() != XmlPullParser.START_TAG) {
+//                continue;
+//            }
+//            String name = parser.getName();
+//            if (name.equals("title")) {
+//                title = readTitle(parser);
+//            } else if (name.equals("summary")) {
+//                summary = readSummary(parser);
+//            } else if (name.equals("link")) {
+//                link = readLink(parser);
+//            } else {
+//                skip(parser);
+//            }
+//        }
+//        return new WeatherEntry(title, summary, link);
+        return null;
     }
 
     // Processes title tags in the feed.

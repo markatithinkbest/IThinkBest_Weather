@@ -1,4 +1,4 @@
-package com.example.android.networkusage;
+package com.ithinkbest.weather17;
 
 import java.util.Arrays;
 
@@ -92,7 +92,7 @@ public class WeatherEntry {
             sb.append(getDateStr(startTime[i])).append(" ~ ").append(getDateStr(endTime[i])).
                     append("<br>");
             sb.append(parameterWxName[i]).append(" ");
-            sb.append("最低"+parameterMinTName[i]).append(" ");
+            sb.append("最低" + parameterMinTName[i]).append(" ");
             sb.append("最高"+parameterMaxTName[i]).append("度<br><br>");
 
 
