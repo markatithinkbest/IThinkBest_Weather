@@ -63,13 +63,14 @@ public class XmlDomParser {
                 Node p = locationList.item(i);
                 if (p.getNodeType() == Node.ELEMENT_NODE) {
                     Element location = (Element) p;
-                    Log.d(LOG_TAG,"..." + location.getTagName().toString());
+                    Log.d(LOG_TAG,"...i="+ i+" "+ location.getTagName().toString());
                     NodeList dataList = location.getChildNodes();
                     for (int j = 0; j < dataList.getLength(); j++) {
                         Node n = dataList.item(j);
+
                         if (n.getNodeType() == Node.ELEMENT_NODE) {
                             Element data = (Element) n;
-                            Log.d(LOG_TAG,"......j="+j+" " + data.getTagName().toString() + " " + data.getTextContent().toString());
+                           Log.d(LOG_TAG,"......???j="+j+" " + data.getTagName().toString() + " " + data.getTextContent().toString());
 
 
                             if (data.getTagName() == "locationName") {
@@ -128,17 +129,10 @@ public class XmlDomParser {
                                         }
                                     }
                                 }
-// for (int k = 0; j < weatherElementList.getLength(); j++) {
-// Node nodeK = weatherElementList.item(k);
-// // if (nodeK.getNodeType() == Node.ELEMENT_NODE) {
-// Element weather = (Element) nodeK;
-// Log.d(LOG_TAG,"..." + weather.getTagName() + " " + weather.getTextContent());
-// // }
-//
-// }
                             } else {
-// Log.d(LOG_TAG,"..." + data.getTagName() + " " + data.getTextContent());
-                         //       Log.d(LOG_TAG,"...WHAT IS THIS?");
+                                Log.d(LOG_TAG,"...WHAT IS THIS? i="+i+"  type is "+n.getNodeType());
+
+
                             }
                         }
                     }
