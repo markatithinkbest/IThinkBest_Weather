@@ -69,7 +69,7 @@ public class TaiwanWeatherXmlParser {
 //            }
 //        }
 //
-        WeatherEntry weatherEntry=new WeatherEntry("title","summary","link");
+        WeatherEntry weatherEntry=new WeatherEntry();
         entries.add(weatherEntry);
 
         return entries;
@@ -81,26 +81,27 @@ public class TaiwanWeatherXmlParser {
     // off
     // to their respective &quot;read&quot; methods for processing. Otherwise, skips the tag.
     private WeatherEntry readEntry(XmlPullParser parser) throws XmlPullParserException, IOException {
-        parser.require(XmlPullParser.START_TAG, ns, "entry");
-        String title = null;
-        String summary = null;
-        String link = null;
-        while (parser.next() != XmlPullParser.END_TAG) {
-            if (parser.getEventType() != XmlPullParser.START_TAG) {
-                continue;
-            }
-            String name = parser.getName();
-            if (name.equals("title")) {
-                title = readTitle(parser);
-            } else if (name.equals("summary")) {
-                summary = readSummary(parser);
-            } else if (name.equals("link")) {
-                link = readLink(parser);
-            } else {
-                skip(parser);
-            }
-        }
-        return new WeatherEntry(title, summary, link);
+//        parser.require(XmlPullParser.START_TAG, ns, "entry");
+//        String title = null;
+//        String summary = null;
+//        String link = null;
+//        while (parser.next() != XmlPullParser.END_TAG) {
+//            if (parser.getEventType() != XmlPullParser.START_TAG) {
+//                continue;
+//            }
+//            String name = parser.getName();
+//            if (name.equals("title")) {
+//                title = readTitle(parser);
+//            } else if (name.equals("summary")) {
+//                summary = readSummary(parser);
+//            } else if (name.equals("link")) {
+//                link = readLink(parser);
+//            } else {
+//                skip(parser);
+//            }
+//        }
+//        return new WeatherEntry(title, summary, link);
+        return null;
     }
 
     // Processes title tags in the feed.

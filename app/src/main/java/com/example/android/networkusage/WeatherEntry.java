@@ -1,5 +1,7 @@
 package com.example.android.networkusage;
 
+import java.util.Arrays;
+
 /**
  * Created by u1 on 2015/4/18.
  */
@@ -81,4 +83,12 @@ public class WeatherEntry {
 
 
     }
+
+//    @Override
+//    public String toString() {
+//        return "WeatherEntry{" +
+//                "locationName='" + locationName + '\'' +
+//                ", startTime=" + Arrays.toString(startTime) +
+//                '}';
+//    }
 }

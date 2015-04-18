@@ -6,8 +6,8 @@ android {
 
     defaultConfig {
         applicationId "com.example.android.networkusage"
-        minSdkVersion 4
-        targetSdkVersion 14
+        minSdkVersion 17
+        targetSdkVersion 22
     }
 
     buildTypes {

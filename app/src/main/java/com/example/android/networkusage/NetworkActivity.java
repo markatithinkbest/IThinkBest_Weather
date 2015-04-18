@@ -293,16 +293,16 @@ public class NetworkActivity extends Activity {
         // This section processes the entries list to combine each entry with HTML markup.
         // Each entry is displayed in the UI as a link that optionally includes
         // a text summary.
-        for (WeatherEntry entry : entries) {
-            htmlString.append("<p><a href='");
-            htmlString.append(entry.link);
-            htmlString.append("'>" + entry.title + "</a></p>");
-            // If the user set the preference to include summary text,
-            // adds it to the display.
-            if (pref) {
-                htmlString.append(entry.summary);
-            }
-        }
+//        for (WeatherEntry entry : entries) {
+//            htmlString.append("<p><a href='");
+//            htmlString.append(entry.link);
+//            htmlString.append("'>" + entry.title + "</a></p>");
+//            // If the user set the preference to include summary text,
+//            // adds it to the display.
+//            if (pref) {
+//                htmlString.append(entry.summary);
+//            }
+//        }
         return htmlString.toString();
     }
 

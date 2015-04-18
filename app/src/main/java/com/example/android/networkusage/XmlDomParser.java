@@ -9,6 +9,9 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author MARK
  */
@@ -25,6 +28,8 @@ public class XmlDomParser {
     }
 
     public static void parse() {
+        List<WeatherEntry> weatherEntryList=new ArrayList<WeatherEntry>();
+
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         try {
             DocumentBuilder builder = factory.newDocumentBuilder();
@@ -59,6 +64,9 @@ public class XmlDomParser {
             NodeList locationList = doc.getElementsByTagName("location");
 //            Log.d(LOG_TAG, "...locationList CNT "+locationList.getLength());
 
+            WeatherEntry weatherEntry=null;
+
+
             for (int i = 0; i < locationList.getLength(); i++) {
                 Node p = locationList.item(i);
                 if (p.getNodeType() == Node.ELEMENT_NODE) {
@@ -81,13 +89,17 @@ public class XmlDomParser {
 
                             if (data.getTagName().equals("locationName")) {
                                 Log.d(LOG_TAG, "------" + data.getTagName().toString() + " " + data.getTextContent().toString());
+
+                                weatherEntry=new WeatherEntry();
+                                weatherEntry.setLocationName(data.getTextContent().toString());
+
                             } else if (data.getTagName().equals("weatherElement")) {
 // Log.d(LOG_TAG,"... going to parse weatherElement");
                                 Log.d(LOG_TAG, "------" + data.getTagName());
                                 NodeList weatherElementList = data.getChildNodes();
 // Log.d(LOG_TAG,"... going to parse weatherElement, weatherElementList.getLength()=" + weatherElementList.getLength());
 // Log.d(LOG_TAG,"... going to parse weatherElement, item 0 NodeName=" + weatherElementList.item(0).getNodeName());
-                                int timeCode=0;
+                                int timeCode=-1;
 
                                 for (int k = 0; k < weatherElementList.getLength(); k++) {
 // Log.d(LOG_TAG,"......k=" + k);
@@ -130,6 +142,11 @@ public class XmlDomParser {
                                                     if (time.getTagName().equals("startTime")) {
                                                         Log.d(LOG_TAG, "------------" + time.getTagName() + " " + time.getTextContent());
                                                         Log.d(LOG_TAG, "------------timeCode=" + timeCode);
+//                                                        if (weatherElemenetCode==1){
+//                                                            weatherEntry.setStartTime(time.getTextContent(),timeCode);
+//                                                        }
+
+
                                                     } else if (time.getTagName().equals("endTime")) {
                                                         Log.d(LOG_TAG, "------------" + time.getTagName() + " " + time.getTextContent());
                                                     } else if (time.getTagName().equals("parameter")) {
@@ -141,6 +158,13 @@ public class XmlDomParser {
                                                             if (nodeN.getNodeType() == Node.ELEMENT_NODE) {
                                                                 Element parameter = (Element) nodeN;
                                                                 Log.d(LOG_TAG, "---------------" + parameter.getTagName() + " " + parameter.getTextContent());
+
+                                                                //
+                                                                if (weatherElemenetCode==3 &&  timeCode==14 && parameter.getTagName().equals("parameterUnit")){
+                                                                  weatherEntryList.add(weatherEntry);
+                                                                    Log.d(LOG_TAG, "###### adding---------------");
+
+                                                                }
                                                             } else {
 // Log.d(LOG_TAG,"??? WHAT NOT ELEMENT_NODE");
                                                             }
@@ -167,6 +191,12 @@ public class XmlDomParser {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+
+        Log.d(LOG_TAG,weatherEntryList.size()+" entries!!!");
+        for (int i=0;i<weatherEntryList.size();i++){
+            Log.d(LOG_TAG,weatherEntryList.get(i).getLocationName());
+//            Log.d(LOG_TAG,weatherEntryList.get(i).toString());
         }
 
     }
