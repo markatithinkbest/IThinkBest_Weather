@@ -66,9 +66,9 @@ public class NetworkActivity extends Activity {
 
     public static final String WIFI = "Wi-Fi";
     public static final String ANY = "Any";
-    private static final String URL =
-            "http://stackoverflow.com/feeds/tag?tagnames=android&sort=newest";
-
+//    private static final String URL =
+//            "http://stackoverflow.com/feeds/tag?tagnames=android&sort=newest";
+//
     private static final String URL2 =
             "http://opendata.cwb.gov.tw/opendataapi?dataid=F-C0032-005&authorizationkey=CWB-B2CA193D-2DE6-4121-AF6A-BFA9C12713BF";
 

@@ -21,7 +21,7 @@
         android:title="下載網路選項"
         android:summary="選擇網路連接方式下載一週天氣預報 "
         android:key="listPref"
-        android:defaultValue="Wi-Fi"
+        android:defaultValue="Any"
         android:entries="@array/listArray"
         android:entryValues="@array/listValues"
      />

@@ -5,7 +5,7 @@ android {
     buildToolsVersion "22.0.1"
 
     defaultConfig {
-        applicationId "com.example.android.networkusage"
+        applicationId "com.ithinkbest.weather17"
         minSdkVersion 17
         targetSdkVersion 22
     }
