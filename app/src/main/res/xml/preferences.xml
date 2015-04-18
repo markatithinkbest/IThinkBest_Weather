@@ -18,7 +18,7 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <ListPreference
-        android:title="下載網路選項"
+        android:title="更新下載網路選項"
         android:summary="選擇網路連接方式下載一週天氣預報 "
         android:key="listPref"
         android:defaultValue="Any"
