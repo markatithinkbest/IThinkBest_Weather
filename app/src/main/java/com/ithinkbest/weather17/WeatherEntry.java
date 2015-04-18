@@ -7,10 +7,27 @@ import java.util.Arrays;
  */
 public class WeatherEntry {
 
-    private  String locationName;
-    private  String[] startTime;
-    private  String[] endTime;
+    private String locationName;
+    private String[] startTime;
+    private String[] endTime;
 
+
+    private String[] parameterWxName;
+    private int[] parameterWxValue;
+    private int[] parameterMaxTName;
+    private int[] parameterMinTName;
+
+    public WeatherEntry() {
+
+        startTime = new String[15];
+        endTime = new String[15];
+        parameterWxName = new String[15];
+        parameterWxValue = new int[15];
+        parameterMaxTName = new int[15];
+        parameterMinTName = new int[15];
+
+
+    }
     public String getLocationName() {
         return locationName;
     }
@@ -23,7 +40,7 @@ public class WeatherEntry {
         return startTime[i];
     }
 
-    public void setStartTime(String startTime,int i) {
+    public void setStartTime(String startTime, int i) {
         this.startTime[i] = startTime;
     }
 
@@ -39,7 +56,7 @@ public class WeatherEntry {
         return parameterWxName[i];
     }
 
-    public void setParameterWxName(String parameterWxName,int i) {
+    public void setParameterWxName(String parameterWxName, int i) {
         this.parameterWxName[i] = parameterWxName;
     }
 
@@ -55,7 +72,7 @@ public class WeatherEntry {
         return parameterMaxTName[i];
     }
 
-    public void setParameterMaxTName(int parameterMaxTName,int i) {
+    public void setParameterMaxTName(int parameterMaxTName, int i) {
         this.parameterMaxTName[i] = parameterMaxTName;
     }
 
@@ -63,56 +80,42 @@ public class WeatherEntry {
         return parameterMinTName[i];
     }
 
-    public void setParameterMinTName(int parameterMinTName,int i) {
+    public void setParameterMinTName(int parameterMinTName, int i) {
         this.parameterMinTName[i] = parameterMinTName;
     }
 
-    private  String[] parameterWxName;
-    private  int [] parameterWxValue;
-    private  int[] parameterMaxTName;
-    private  int[] parameterMinTName;
-
-    public WeatherEntry(){
-
-        startTime=new String[15];
-        endTime=new String[15];
-        parameterWxName=new String[15];
-        parameterWxValue=new int[15];
-        parameterMaxTName=new int[15];
-        parameterMinTName=new int[15];
-
-
+    String getDateStr(String str) {
+        return str.substring(5, 7) + "/" + str.substring(8, 10) + " " + str.substring(11, 16);
     }
-    String getDateStr(String str){
-        return str.substring(5,7)+"/"+str.substring(8,10)+" "+str.substring(11,16);
-    }
-    public String getCurrent(){
-        StringBuilder sb=new StringBuilder();
-        for (int i=0;i<1;i++){
+
+    public String getCurrent() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 1; i++) {
             sb.append(getDateStr(startTime[i])).append(" ~ ").append(getDateStr(endTime[i])).
                     append("<br>");
             sb.append(parameterWxName[i]).append(" ");
             sb.append("最低" + parameterMinTName[i]).append(" ");
-            sb.append("最高"+parameterMaxTName[i]).append("度<br><br>");
+            sb.append("最高" + parameterMaxTName[i]).append("度<br><br>");
 
 
         }
         return sb.toString();
     }
 
-    public String getDetail(){
-        StringBuilder sb=new StringBuilder();
-        for (int i=0;i<14;i++){
+    public String getDetail() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 14; i++) {
             sb.append(getDateStr(startTime[i])).append(" ~ ").append(getDateStr(endTime[i])).
                     append("<br>");
             sb.append(parameterWxName[i]).append(" ");
-            sb.append("最低"+parameterMinTName[i]).append(" ");
-            sb.append("最高"+parameterMaxTName[i]).append("度<br><br>");
+            sb.append("最低" + parameterMinTName[i]).append(" ");
+            sb.append("最高" + parameterMaxTName[i]).append("度<br><br>");
 
 
         }
         return sb.toString();
     }
+
     @Override
     public String toString() {
         return "WeatherEntry{" +
