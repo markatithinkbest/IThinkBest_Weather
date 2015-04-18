@@ -27,7 +27,7 @@ public class XmlDomParser {
         // TODO code application logic here
     }
 
-    public static void parse() {
+    public static  List<WeatherEntry> parse() {
         List<WeatherEntry> weatherEntryList=new ArrayList<WeatherEntry>();
 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -38,7 +38,7 @@ public class XmlDomParser {
 //            Document doc = builder.parse("C:\\xmlfiles\\F-C0032-005.xml");
             Document doc = builder.parse(URL2);
 
-            Log.d(LOG_TAG, "...DOING PARSE...");
+//            Log.d(LOG_TAG, "...DOING PARSE...");
 
             // paring single datasetInfo
             NodeList dataInfoList = doc.getElementsByTagName("datasetInfo");
@@ -52,7 +52,7 @@ public class XmlDomParser {
                         Node e2Node = e2List.item(x2);
                         if (e2Node.getNodeType() == Node.ELEMENT_NODE) {
                             Element e2 = (Element) e2Node;
-                            Log.d(LOG_TAG, "......" + e2.getTagName() + " " + e2.getTextContent());
+//                            Log.d(LOG_TAG, "......" + e2.getTagName() + " " + e2.getTextContent());
                         }
                     }
                 }
@@ -204,11 +204,11 @@ public class XmlDomParser {
             e.printStackTrace();
         }
 
-        Log.d(LOG_TAG,weatherEntryList.size()+" entries!!!");
-        for (int i=0;i<weatherEntryList.size();i++){
-            Log.d(LOG_TAG,weatherEntryList.get(i).toString());
-        }
-
+//        Log.d(LOG_TAG,weatherEntryList.size()+" entries!!!");
+//        for (int i=0;i<weatherEntryList.size();i++){
+//            Log.d(LOG_TAG,weatherEntryList.get(i).toString());
+//        }
+       return weatherEntryList;
     }
 
 }
