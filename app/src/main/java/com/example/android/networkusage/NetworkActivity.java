@@ -25,6 +25,7 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -62,6 +63,9 @@ import java.util.List;
  *   to refresh the WebView content.
  */
 public class NetworkActivity extends Activity {
+    public static final String LOG_TAG = "MARK987";
+
+
     public static final String WIFI = "Wi-Fi";
     public static final String ANY = "Any";
     private static final String URL =
@@ -271,6 +275,9 @@ public class NetworkActivity extends Activity {
 
             // to fix parser here
             entries = taiwanWeatherXmlParser.parse(stream);
+            XmlDomParser.parse();
+            Log.d(LOG_TAG, "...after converting to entries");
+
 
 
             // Makes sure that the InputStream is closed after the app is

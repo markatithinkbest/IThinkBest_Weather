@@ -32,7 +32,12 @@ import java.util.List;
 public class TaiwanWeatherXmlParser {
     private static final String ns = null;
 
-    // We don't use namespaces
+
+
+
+
+
+
 
     public List<WeatherEntry> parse(InputStream in) throws XmlPullParserException, IOException {
         try {
