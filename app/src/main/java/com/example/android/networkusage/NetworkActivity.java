@@ -253,7 +253,7 @@ public class NetworkActivity extends Activity {
 
 
 
-        List<TaiwanWeatherXmlParser.WeatherEntry> entries = null;
+        List<WeatherEntry> entries = null;
         String title = null;
         String url = null;
         String summary = null;
@@ -293,7 +293,7 @@ public class NetworkActivity extends Activity {
         // This section processes the entries list to combine each entry with HTML markup.
         // Each entry is displayed in the UI as a link that optionally includes
         // a text summary.
-        for (TaiwanWeatherXmlParser.WeatherEntry entry : entries) {
+        for (WeatherEntry entry : entries) {
             htmlString.append("<p><a href='");
             htmlString.append(entry.link);
             htmlString.append("'>" + entry.title + "</a></p>");
