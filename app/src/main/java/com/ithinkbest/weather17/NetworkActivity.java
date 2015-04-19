@@ -62,6 +62,9 @@ import java.util.List;
 public class NetworkActivity extends Activity {
     public static final String LOG_TAG = "MARK987";
 
+    public static List<WeatherEntry> entries = null;
+
+
 
     public static final String WIFI = "Wi-Fi";
     public static final String ANY = "Any";
@@ -259,7 +262,11 @@ public class NetworkActivity extends Activity {
 //        TaiwanWeatherXmlParser taiwanWeatherXmlParser = new TaiwanWeatherXmlParser();
 
 
-        List<WeatherEntry> entries = null;
+
+//        List<WeatherEntry> entries = null;
+        entries = null;
+
+
         String title = null;
         String url = null;
         String summary = null;

@@ -10,6 +10,9 @@ import android.widget.ListView;
 
 import com.ithinkbest.weather17.dummy.DummyContent;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * A list fragment representing a list of Items. This fragment
  * also supports tablet devices by allowing list items to be given an
@@ -72,11 +75,37 @@ public class ItemListFragment extends ListFragment {
         super.onCreate(savedInstanceState);
 
         // TODO: replace with a real list adapter.
-        setListAdapter(new ArrayAdapter<DummyContent.DummyItem>(
-                getActivity(),
-                android.R.layout.simple_list_item_activated_1,
-                android.R.id.text1,
-                DummyContent.ITEMS));
+//        setListAdapter(new ArrayAdapter<DummyContent.DummyItem>(
+//                getActivity(),
+//                android.R.layout.simple_list_item_activated_1,
+//                android.R.id.text1,
+//                DummyContent.ITEMS));
+
+//        List<WeatherEntry>=new
+
+        List<String> items= new ArrayList <String>();
+
+        for (WeatherEntry entry:NetworkActivity.entries){
+            items.add(entry.getLocationName());
+
+        }
+
+        ArrayAdapter<String> itemsAdapter =
+                new ArrayAdapter<String>(
+                        getActivity(),
+                        android.R.layout.simple_list_item_activated_1,
+                        android.R.id.text1,
+                        items);
+
+        setListAdapter(itemsAdapter);
+
+
+//
+//        int k=0;
+//        for (WeatherEntry entry:NetworkActivity.entries){
+//            DummyItem item=new DummyItem( ""+(k++),entry.getLocationName());
+//            addItem(item);
+//        }
     }
 
     @Override

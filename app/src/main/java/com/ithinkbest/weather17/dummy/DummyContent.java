@@ -1,5 +1,8 @@
 package com.ithinkbest.weather17.dummy;
 
+import com.ithinkbest.weather17.NetworkActivity;
+import com.ithinkbest.weather17.WeatherEntry;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,9 +28,14 @@ public class DummyContent {
 
     static {
         // Add 3 sample items.
-        addItem(new DummyItem("1", "Item 1"));
-        addItem(new DummyItem("2", "Item 2"));
-        addItem(new DummyItem("3", "Item 3"));
+//        addItem(new DummyItem("1", "Item 1"));
+//        addItem(new DummyItem("2", "Item 2"));
+//        addItem(new DummyItem("3", "Item 3"));
+        int k=0;
+        for (WeatherEntry entry:NetworkActivity.entries){
+            DummyItem item=new DummyItem( ""+(k++),entry.getLocationName());
+            addItem(item);
+        }
     }
 
     private static void addItem(DummyItem item) {
