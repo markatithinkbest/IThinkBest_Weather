@@ -25,13 +25,12 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.webkit.WebView;
 import android.widget.Toast;
-
-
 
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -190,6 +189,11 @@ public class NetworkActivity extends Activity {
                 return true;
             case R.id.refresh:
                 loadPage();
+                return true;
+            case R.id.debug:
+                Log.d(LOG_TAG,"...to start ItemListActivity");
+                Intent intent = new Intent(this, ItemListActivity.class);
+                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
