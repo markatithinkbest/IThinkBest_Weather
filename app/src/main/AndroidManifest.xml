@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!--
   Copyright (C) 2012 The Android Open Source Project
 
@@ -12,38 +13,61 @@
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
   limitations under the License.
-  -->
-
+-->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ithinkbest.weather17"
     android:versionCode="2"
     android:versionName="1.1" >
 
-    <uses-sdk android:minSdkVersion="17"
+    <uses-sdk
+        android:minSdkVersion="17"
         android:targetSdkVersion="22" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
+    <android:uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <android:uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
+
     <application
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" >
-
         <activity
-            android:name="com.ithinkbest.weather17.NetworkActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/app_name" >
+            android:name=".NetworkActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:label="SettingsActivity" android:name="com.ithinkbest.weather17.SettingsActivity">
-             <intent-filter>
+        <activity
+            android:name=".SettingsActivity"
+            android:label="SettingsActivity" >
+            <intent-filter>
                 <action android:name="android.intent.action.MANAGE_NETWORK_USAGE" />
+
                 <category android:name="android.intent.category.DEFAULT" />
-          </intent-filter>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ItemListActivity"
+            android:label="@string/title_item_list" >
+        </activity>
+        <activity
+            android:name=".ItemDetailActivity"
+            android:label="@string/title_item_detail"
+            android:parentActivityName=".ItemListActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ithinkbest.weather17.ItemListActivity" />
         </activity>
     </application>
+
 </manifest>

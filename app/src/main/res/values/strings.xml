@@ -31,5 +31,7 @@
     <string name="wifi_connected">Wi-Fi已連接</string>
     <string name="connection_error">無法更新，請檢查網路設定</string>
     <string name="xml_error">無法解析 XML.</string>
+    <string name="title_item_list">Items</string>
+    <string name="title_item_detail">Item Detail</string>
 
 </resources>
