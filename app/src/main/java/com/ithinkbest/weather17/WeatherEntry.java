@@ -108,8 +108,24 @@ public class WeatherEntry {
             sb.append(getDateStr(startTime[i])).append(" ~ ").append(getDateStr(endTime[i])).
                     append("<br>");
             sb.append(parameterWxName[i]).append(" ");
-            sb.append("最低" + parameterMinTName[i]).append(" ");
-            sb.append("最高" + parameterMaxTName[i]).append("度<br><br>");
+//            sb.append("最低" + parameterMinTName[i]).append(" ");
+//            sb.append("最高" + parameterMaxTName[i]).append("度<br><br>");
+            sb.append("" + parameterMinTName[i]).append("°C  ");
+            sb.append(" ~ " + parameterMaxTName[i]).append("°C <br><br>");
+
+
+        }
+        return sb.toString();
+    }
+    public String getDetailText() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(" ==="+locationName+" ===\n\n");
+        for (int i = 0; i < 14; i++) {
+            sb.append(getDateStr(startTime[i])).append(" ~ ").append(getDateStr(endTime[i])).
+                    append("\n");
+            sb.append(parameterWxName[i]).append(" \n");
+            sb.append("" + parameterMinTName[i]).append("°C ");
+            sb.append(" ~ " + parameterMaxTName[i]).append("\u00B0C\n\n");
 
 
         }

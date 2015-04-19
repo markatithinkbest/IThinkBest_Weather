@@ -24,7 +24,7 @@ public class DummyContent {
     /**
      * A map of sample (dummy) items, by ID.
      */
-    public static Map<String, DummyItem> ITEM_MAP = new HashMap<String, DummyItem>();
+    public static Map<String, DummyItem2> ITEM_MAP = new HashMap<String, DummyItem2>();
 
     static {
         // Add 3 sample items.
@@ -33,14 +33,17 @@ public class DummyContent {
 //        addItem(new DummyItem("3", "Item 3"));
         int k=0;
         for (WeatherEntry entry:NetworkActivity.entries){
-            DummyItem item=new DummyItem( ""+(k++),entry.getLocationName());
-            addItem(item);
+            k++;
+            DummyItem item=new DummyItem( ""+(k),entry.getLocationName());
+            DummyItem2 item2=new DummyItem2( ""+(k),entry.getDetailText());
+
+            addItem(item,item2);
         }
     }
 
-    private static void addItem(DummyItem item) {
+    private static void addItem(DummyItem item,DummyItem2 item2) {
         ITEMS.add(item);
-        ITEM_MAP.put(item.id, item);
+        ITEM_MAP.put(item.id, item2);
     }
 
     /**
@@ -50,14 +53,33 @@ public class DummyContent {
         public String id;
         public String content;
 
+
         public DummyItem(String id, String content) {
             this.id = id;
             this.content = content;
+
         }
 
         @Override
         public String toString() {
-            return content;
+            return id+". "+content;
+        }
+    }
+
+    public static class DummyItem2 {
+        public String id;
+        public String content;
+
+
+        public DummyItem2(String id, String content) {
+            this.id = id;
+            this.content = content;
+
+        }
+
+        @Override
+        public String toString() {
+            return "yyy"+content;
         }
     }
 }

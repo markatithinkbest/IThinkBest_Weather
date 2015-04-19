@@ -17,7 +17,7 @@ import android.view.MenuItem;
  * more than a {@link ItemDetailFragment}.
  */
 public class ItemDetailActivity extends Activity {
-
+    public static final String LOG_TAG = "MARK987";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

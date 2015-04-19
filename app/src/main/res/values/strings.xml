@@ -23,7 +23,7 @@
     <!--  Menu items -->
     <string name="settings">設定</string>
     <string name="refresh">更新</string>
-    <string name="debug">...測試</string>
+    <string name="debug">Master/Detail展示方式</string>
 
     <!--  NetworkActivity -->
     <string name="page_title">一般天氣預報-一週縣市天氣預報</string>
@@ -32,7 +32,7 @@
     <string name="wifi_connected">Wi-Fi已連接</string>
     <string name="connection_error">無法更新，請檢查網路設定</string>
     <string name="xml_error">無法解析 XML.</string>
-    <string name="title_item_list">Items</string>
-    <string name="title_item_detail">Item Detail</string>
+    <string name="title_item_list">IThinkBest 一週縣市天氣預報</string>
+    <string name="title_item_detail">縣市天氣預報</string>
 
 </resources>

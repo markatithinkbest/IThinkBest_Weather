@@ -26,7 +26,9 @@ public class ItemDetailFragment extends Fragment {
     /**
      * The dummy content this fragment is presenting.
      */
-    private DummyContent.DummyItem mItem;
+    private DummyContent.DummyItem2 mItem;
+    private String mItem2;
+
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -44,6 +46,7 @@ public class ItemDetailFragment extends Fragment {
             // arguments. In a real-world scenario, use a Loader
             // to load content from a content provider.
             mItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
+
         }
     }
 
